@@ -3,4 +3,4 @@ Author: Tiffany Timbers
 
 *note - this is a toy repo for UBC's DSCI 524 course*
 
-![](https://github.com/ttimbers/foocat/workflows/Python%20package/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/ttimbers/foocat/badge.svg?branch=master)](https://coveralls.io/github/ttimbers/foocat?branch=master)
+![](https://github.com/ttimbers/foocat/workflows/Python%20package/badge.svg) [![codecov](https://codecov.io/gh/ttimbers/foocat/branch/master/graph/badge.svg)](https://codecov.io/gh/ttimbers/foocat)
