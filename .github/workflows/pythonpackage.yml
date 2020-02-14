@@ -20,13 +20,15 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install codecov
     - name: Test with pytest
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-        COVERALLS_GIT_BRANCH: "${{ github.ref }}"
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
       run: |
         pip install pytest
         pip install pytest-cov
         pip install coveralls
         pytest --cov=.
+        codecov
         coveralls
