@@ -39,13 +39,16 @@ jobs:
         yml: ./codecov.yml 
         fail_ci_if_error: true
     - name: Bump version
+      env:
+        PR_BRANCH: ${{ secrets.GITHUB_TOKEN }}
       run: |
         pip install --upgrade bump2version
         echo $(grep "^version" pyproject.toml | cut -d " " -f 3)
-        echo ${GITHUB_REF:11}
+        echo $PR_BRANCH
+        echo ${{ github.head_ref }}
         echo "Pull request's base branch is: ${BASE_BRANCH}"
-        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${GITHUB_REF:11}
-        poetry version ${GITHUB_REF:11}
+        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${{ github.head_ref }}
+        poetry version ${{ github.head_ref }}
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
