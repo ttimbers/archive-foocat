@@ -35,6 +35,10 @@ jobs:
         name: codecov-umbrella
         yml: ./codecov.yml 
         fail_ci_if_error: true
+    - name: checkout
+      uses: actions/checkout@master
+      with:
+        ref: master
     - name: Bump version
       run: |
         pip install --upgrade bump2version
