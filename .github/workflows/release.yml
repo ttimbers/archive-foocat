@@ -1,9 +1,12 @@
-name: Minor release
+name: Release
 
-on:
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created
+on: 
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
     
 jobs:
   build:
@@ -36,10 +39,12 @@ jobs:
         yml: ./codecov.yml 
         fail_ci_if_error: true
     - name: Bump version
+      env:
+        NEW_VERSION: ${GITHUB_REF:11}
       run: |
         pip install --upgrade bump2version
-        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) minor
-        poetry version minor
+        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${GITHUB_REF:11}
+        poetry version ${GITHUB_REF:11}
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
