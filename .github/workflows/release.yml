@@ -39,8 +39,6 @@ jobs:
         yml: ./codecov.yml 
         fail_ci_if_error: true
     - name: Bump version
-      env:
-        NEW_VERSION: ${GITHUB_REF:11}
       run: |
         pip install --upgrade bump2version
         bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${GITHUB_REF:11}
