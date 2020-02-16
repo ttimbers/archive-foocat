@@ -1,5 +1,5 @@
 ## `foocat`
-Author: Tiffany Timbers
+Tiffany Timbers, 2020-02-16
 
 *note - this is a toy Python package repo for UBC's DSCI 524 course*
 
