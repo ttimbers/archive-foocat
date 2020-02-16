@@ -43,6 +43,7 @@ jobs:
         pip install --upgrade bump2version
         echo $(grep "^version" pyproject.toml | cut -d " " -f 3)
         echo ${GITHUB_REF:11}
+        echo "Pull request's base branch is: ${BASE_BRANCH}"
         bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${GITHUB_REF:11}
         poetry version ${GITHUB_REF:11}
     - name: Commit files
