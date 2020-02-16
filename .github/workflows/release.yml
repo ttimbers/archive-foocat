@@ -39,20 +39,15 @@ jobs:
         yml: ./codecov.yml 
         fail_ci_if_error: true
     - name: Bump version
-      env:
-        PR_BRANCH: ${{ secrets.GITHUB_TOKEN }}
       run: |
         pip install --upgrade bump2version
-        echo $(grep "^version" pyproject.toml | cut -d " " -f 3)
-        echo $PR_BRANCH
-        echo ${{ github.head_ref }}
-        echo "Pull request's base branch is: ${BASE_BRANCH}"
         bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${{ github.head_ref }}
         poetry version ${{ github.head_ref }}
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git pull
         git commit -m "Add changes" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
@@ -64,8 +59,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        tag_name: ${{ github.head_ref }}
+        release_name: Release ${{ github.head_ref }}
         draft: false
         prerelease: false
     - name: Build and publish
