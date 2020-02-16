@@ -7,3 +7,12 @@ Python package that eases the pain concatenating Pandas categoricals!
 
 ![](https://github.com/ttimbers/foocat/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/ttimbers/foocat/branch/master/graph/badge.svg)](https://codecov.io/gh/ttimbers/foocat) ![Release](https://github.com/ttimbers/foocat/workflows/Release/badge.svg)
 
+### Installation:
+
+```
+pip install -i https://test.pypi.org/simple/ foocat
+```
+
+### Dependencies
+
+- Pandas
