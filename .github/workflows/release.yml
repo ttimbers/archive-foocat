@@ -71,8 +71,6 @@ jobs:
         release_name: ${RELEASE_TAG}
         draft: false
         prerelease: false
-      run: |
-        echo ${RELEASE_TAG}
     - name: Build and publish
       env:
         PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
