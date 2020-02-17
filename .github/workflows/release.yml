@@ -13,7 +13,7 @@ jobs:
         python-version: [3.7]
     steps:
     - name: Set git tag in env
-      run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF:10}
+      run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF#refs/tags/}
     - name: test
       run: echo ${{ env.RELEASE_VERSION }}
     - uses: actions/checkout@v2
