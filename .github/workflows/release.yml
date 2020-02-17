@@ -44,8 +44,8 @@ jobs:
         pip install --upgrade bump2version
         cat .bumpversion.cfg
         cat foocat/__init__.py
-        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) minor
-        poetry version minor
+        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) --new-version $(git describe --tags)
+        poetry version $(git describe --tags)
         cat .bumpversion.cfg
         cat foocat/__init__.py
     - name: Commit files
@@ -62,8 +62,8 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Release tag
       run: |
-        echo $(grep "^version" pyproject.toml | cut -d " " -f 3)
-        echo ::set-output name=release_tag::$(grep "^version" pyproject.toml | cut -d '"' -f 2)
+        echo $(git describe --tags)
+        echo ::set-output name=release_tag::$(git describe --tags)
       id: release
     - name: Create Release
       id: create_release
