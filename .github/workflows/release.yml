@@ -44,11 +44,15 @@ jobs:
         pip install --upgrade bump2version
         bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${{ github.head_ref }}
         poetry version ${{ github.head_ref }}
+        cat .bumpversion.cfg
+        cat foocat/__init__.py
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
+        git status
         git pull
+        git status
         git commit -m "Add changes" -a
     - name: Push changes
       uses: ad-m/github-push-action@master
