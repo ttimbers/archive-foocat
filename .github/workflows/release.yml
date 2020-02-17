@@ -1,9 +1,9 @@
 name: Release
 
 on: 
-  push:
-    branches:
-    - master
+  pull_request:
+    branches: [master]
+    types: [closed]
     
 jobs:
   build:
@@ -12,18 +12,6 @@ jobs:
       matrix:
         python-version: [3.7]
     steps:
-    - name: checkout
-      uses: actions/checkout@master
-      with:
-        ref: master
-    - name: explore tags
-      run: |
-        git checkout master
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git status
-        git describe --abbrev=0 --tags
-        echo $(git describe --abbrev=0 --tags)
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
@@ -47,14 +35,6 @@ jobs:
         name: codecov-umbrella
         yml: ./codecov.yml 
         fail_ci_if_error: true
-        
-    - name: Get Previous tag
-      id: previoustag
-      uses: "WyriHaximus/github-action-get-previous-tag@master"
-      env:
-        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-    - name: Print tag
-      run: echo ${{ steps.previoustag.outputs.tag }}
     - name: checkout
       uses: actions/checkout@master
       with:
@@ -66,12 +46,8 @@ jobs:
     - name: Bump version
       run: |
         pip install --upgrade bump2version
-        cat .bumpversion.cfg
-        cat foocat/__init__.py
-        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) --new-version ${{ steps.get_tag.outputs.RELEASE_VERSION }}
-        poetry version ${{ steps.get_tag.outputs.RELEASE_VERSION }}
-        cat .bumpversion.cfg
-        cat foocat/__init__.py
+        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) minor
+        poetry version minor
     - name: Commit files
       run: |
         git config --local user.email "action@github.com"
@@ -86,7 +62,6 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: Release tag
       run: |
-        echo $(git describe --tags)
         echo ::set-output name=release_tag::$(git describe --tags)
       id: release
     - name: Create Release
