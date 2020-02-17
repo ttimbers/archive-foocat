@@ -66,8 +66,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.head_ref }}
-        release_name: Release ${{ github.head_ref }}
+        tag_name: $(grep "^version" pyproject.toml | cut -d " " -f 3)
+        release_name: $(grep "^version" pyproject.toml | cut -d " " -f 3)
         draft: false
         prerelease: false
     - name: Build and publish
