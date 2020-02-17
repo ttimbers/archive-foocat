@@ -42,8 +42,10 @@ jobs:
     - name: Bump version
       run: |
         pip install --upgrade bump2version
-        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) ${{ github.head_ref }}
-        poetry version ${{ github.head_ref }}
+        cat .bumpversion.cfg
+        cat foocat/__init__.py
+        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) minor
+        poetry version minor
         cat .bumpversion.cfg
         cat foocat/__init__.py
     - name: Commit files
