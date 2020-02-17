@@ -46,7 +46,6 @@ jobs:
     - name: Bump version
       run: |
         pip install --upgrade bump2version
-        echo "The tag version is" ${{ steps.get_tag.outputs.RELEASE_VERSION }}
         cat .bumpversion.cfg
         cat foocat/__init__.py
         bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) --new-version ${{ steps.get_tag.outputs.RELEASE_VERSION }}
