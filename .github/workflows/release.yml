@@ -60,15 +60,19 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Name Release tag
+      - run: |
+        echo $(grep "^version" pyproject.toml | cut -d " " -f 3)
+        echo ::set-output name=release_tag::$(grep "^version" pyproject.toml | cut -d " " -f 3)
+      id: release
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        RELEASE_TAG: $(grep "^version" pyproject.toml | cut -d " " -f 3)
       with:
-        tag_name: ${RELEASE_TAG}
-        release_name: ${RELEASE_TAG}
+        tag_name: ${{ steps.release.outputs.release_tag }}
+        release_name: ${{ steps.release.outputs.release_tag }}
         draft: false
         prerelease: false
     - name: Build and publish
