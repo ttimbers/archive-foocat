@@ -60,8 +60,8 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: Name Release tag
-      - run: |
+    - name: Release tag
+      run: |
         echo $(grep "^version" pyproject.toml | cut -d " " -f 3)
         echo ::set-output name=release_tag::$(grep "^version" pyproject.toml | cut -d " " -f 3)
       id: release
