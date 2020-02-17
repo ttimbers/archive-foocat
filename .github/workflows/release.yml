@@ -13,9 +13,10 @@ jobs:
         python-version: [3.7]
     steps:
     - name: Set git tag in env
-      run: echo ::set-env name=RELEASE_VERSION::${GITHUB_REF/refs\/tags\//}
+      run: echo ::set-output name=RELEASE_VERSION::${GITHUB_REF/refs\/tags\//}
+      id: get_tag
     - name: test
-      run: echo ${{ env.RELEASE_VERSION }}
+      run: echo ${{ steps.get_tag.outputs.RELEASE_VERSION }}
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
