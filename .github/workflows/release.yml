@@ -47,11 +47,11 @@ jobs:
     - name: Bump version
       run: |
         pip install --upgrade bump2version
-        echo "The tag version is" $(git describe --tags)
+        echo "The tag version is" ${{ steps.get_tag.outputs.RELEASE_VERSION }}
         cat .bumpversion.cfg
         cat foocat/__init__.py
-        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) --new-version $(git describe --tags)
-        poetry version $(git describe --tags)
+        bump2version --current-version $(grep "^version" pyproject.toml | cut -d " " -f 3) --new-version ${{ steps.get_tag.outputs.RELEASE_VERSION }}
+        poetry version ${{ steps.get_tag.outputs.RELEASE_VERSION }}
         cat .bumpversion.cfg
         cat foocat/__init__.py
     - name: Commit files
