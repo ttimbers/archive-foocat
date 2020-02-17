@@ -65,9 +65,10 @@ jobs:
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_TAG: $(grep "^version" pyproject.toml | cut -d " " -f 3)
       with:
-        tag_name: $(grep "^version" pyproject.toml | cut -d " " -f 3)
-        release_name: $(grep "^version" pyproject.toml | cut -d " " -f 3)
+        tag_name: $RELEASE_TAG
+        release_name: $RELEASE_TAG
         draft: false
         prerelease: false
     - name: Build and publish
