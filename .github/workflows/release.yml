@@ -67,10 +67,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         RELEASE_TAG: $(grep "^version" pyproject.toml | cut -d " " -f 3)
       with:
-        tag_name: ${{ RELEASE_TAG }}
-        release_name: ${{ RELEASE_TAG }}
+        tag_name: ${RELEASE_TAG}
+        release_name: ${RELEASE_TAG}
         draft: false
         prerelease: false
+      run: |
+        echo ${RELEASE_TAG}
     - name: Build and publish
       env:
         PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
