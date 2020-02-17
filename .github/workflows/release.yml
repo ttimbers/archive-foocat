@@ -18,10 +18,11 @@ jobs:
         ref: master
     - name: explore tags
       run: |
-      git config --local user.email "action@github.com"
-      git config --local user.name "GitHub Action"
-      git status
-      echo $(git describe --abbrev=0 --tags)
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git status
+        git describe --abbrev=0 --tags
+        echo $(git describe --abbrev=0 --tags)
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
