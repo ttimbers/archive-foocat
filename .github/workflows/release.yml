@@ -35,6 +35,14 @@ jobs:
         name: codecov-umbrella
         yml: ./codecov.yml 
         fail_ci_if_error: true
+        
+    - name: Get Previous tag
+      id: previoustag
+      uses: "WyriHaximus/github-action-get-previous-tag@master"
+      env:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    - name: Print tag
+      run: echo ${{ steps.previoustag.outputs.tag }}
     - name: checkout
       uses: actions/checkout@master
       with:
