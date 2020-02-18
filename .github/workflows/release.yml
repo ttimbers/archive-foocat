@@ -40,12 +40,14 @@ jobs:
         ref: master
     - name: Bump version and tagging and publish
       run: |
-        git config --global user.email "tqshelly@gmail.com"
-        git config --global user.name "github actions"
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
         git pull origin master
+        git status
         poetry run semantic-release publish
+        git status
       env:
-        GH_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Release tag
       run: |
         echo ::set-output name=release_tag::$(grep "^version" pyproject.toml | cut -d '"' -f 2)
