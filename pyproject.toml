@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "foocat"
-version = "0.12.7"
+version = "0.12.8"
 description = ""
 authors = ["ttimbers <tiffany.timbers@stat.ubc.ca>"]
 
