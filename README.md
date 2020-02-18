@@ -1,7 +1,7 @@
 ## `foocat`
 Tiffany Timbers, 2020-02-16
 
-*note - this is a toy Python package repo for UBC's DSCI 524 course*
+*note - this is a toy Python package repo for UBC's [DSCI 524](https://github.com/UBC-MDS/DSCI_524_collab-sw-dev) Collaborative Software Development course*
 
 Python package that eases the pain concatenating Pandas categoricals!
 
