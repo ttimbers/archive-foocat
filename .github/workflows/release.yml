@@ -43,25 +43,14 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git pull origin master
-        git status
         poetry run semantic-release publish
-        git status
+        poetry version $(grep "version" foocat/__init__.py | cut -d " "  -f 3)
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Release tag
       run: |
         echo ::set-output name=release_tag::$(grep "^version" pyproject.toml | cut -d '"' -f 2)
       id: release
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.release.outputs.release_tag }}
-        release_name: ${{ steps.release.outputs.release_tag }}
-        draft: false
-        prerelease: false
     - name: Build and publish
       env:
         PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
