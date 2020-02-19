@@ -1,4 +1,4 @@
-## `foocat`
+## `foocat` Python package
 Tiffany Timbers, 2020-02-19
 
 *note - this is a toy Python package repo for UBC's [DSCI 524](https://github.com/UBC-MDS/DSCI_524_collab-sw-dev) Collaborative Software Development course*
