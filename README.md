@@ -24,7 +24,6 @@ pip install -i https://test.pypi.org/simple/ foocat
 >>> a = pd.Categorical(["character", "hits", "your", "eyeballs"])
 >>> b = pd.Categorical(["but", "integer", "where it", "counts"])
 >>> cat.catbind(a, b)
-cat.catbind(a, b)
 ```
 
 ```
