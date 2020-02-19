@@ -17,7 +17,7 @@ pip install -i https://test.pypi.org/simple/ foocat
 
 - Pandas
 
-### Usaage
+### Usage
 
 ```
 >>> import pandas as pd
