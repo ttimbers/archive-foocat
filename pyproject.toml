@@ -15,6 +15,7 @@ codecov = "^2.0.15"
 python-semantic-release = "4.6.0"
 sphinx = "^2.4.2"
 recommonmark = "^0.6.0"
+flake8 = "^3.7.9"
 
 [tool.semantic_release]
 version_variable = "foocat/__init__.py:__version__"
